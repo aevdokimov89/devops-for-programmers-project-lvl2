@@ -1,2 +1,8 @@
-- name: geerlingguy.pip
-  src: geerlingguy.pip
+roles:
+ - name: geerlingguy.pip
+   src: geerlingguy.pip
+ - name: datadog.datadog
+   src: datadog.datadog
+
+collections:
+- name: community.docker
