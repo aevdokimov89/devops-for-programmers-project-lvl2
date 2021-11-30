@@ -1,0 +1,41 @@
+- hosts: all
+  become: true 
+  
+  tasks:
+    - name: create_db_env
+      template:
+        src: templates/db.env.js2
+        dest: ~/db.env
+
+    - name: create_redmine_env
+      template:
+        src: templates/redmine.env.js2
+        dest: ~/redmine.env
+
+    - name: postgres_run
+      docker_container:
+        name: some-postgres
+        recreate: yes
+        image: postgres
+        state: started
+        env_file:
+            '~/db.env'
+
+    - name: redmine_run
+      docker_container:
+        name: some-redmine
+        recreate: yes
+        image: redmine
+        state: started
+        ports: 8080:3000
+        env_file:
+            '~/redmine.env'
+
+    - name: Create a network
+      docker_network:
+        driver: bridge
+        name: docker-net
+        connected:
+        - some-redmine
+        - some-postgres 
+        appends: yes

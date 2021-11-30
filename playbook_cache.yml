@@ -1,0 +1,7 @@
+- hosts: all
+  become: true
+  gather_facts: no
+
+  tasks:
+    - name: Update cache
+      apt: update_cache=yes

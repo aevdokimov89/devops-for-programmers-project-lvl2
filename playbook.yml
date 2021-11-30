@@ -1,0 +1,14 @@
+- hosts: all
+  become: true
+
+- name: update_cache
+  import_playbook: playbook_cache.yml
+
+- name: install packages
+  import_playbook: playbook_packages.yml
+
+- name: deploy redmine
+  import_playbook: playbook_deploy.yml
+
+- name: datadog
+  import_playbook: playbook_datadog.yml

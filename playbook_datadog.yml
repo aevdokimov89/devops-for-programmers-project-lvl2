@@ -1,0 +1,7 @@
+- hosts: webservers
+  become: true
+  gather_facts: no
+
+  roles:
+    - { role: datadog.datadog, become: yes }
+

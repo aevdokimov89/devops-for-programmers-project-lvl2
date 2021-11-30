@@ -1,0 +1,17 @@
+REDMINE_DB_POSTGRES: db-postgresql-nyc3-76019-do-user-10328159-0.b.db.ondigitalocean.com
+REDMINE_DB_PORT: 25060
+REDMINE_DB_DATABASE: defaultdb
+REDMINE_DB_USERNAME: doadmin
+REDMINE_SECRET_KEY_BASE: require
+REDMINE_DB_PASSWORD: "{{vault_REDMINE_DB_PASSWORD}}"
+
+pip_install_packages:
+  - name: docker
+    update_cache: yes
+    state: present
+  - name: awscli
+    update_cache: yes
+    state: present
+
+datadog_api_key: "{{vault_datadog_api_key}}"
+datadog_site: "datadoghq.com"
